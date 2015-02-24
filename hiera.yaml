@@ -1,0 +1,15 @@
+---
+:backends: yaml
+
+:yaml:
+  :datadir: "/vagrant/puppet-r10k-hiera"
+
+:hierarchy:
+  - defaults
+  - "role/%{::role}/%{::role_group}"
+  - "role/application/%{::application}"
+  - "role/%{::role}"
+  - "tier/%{::tier}"
+  - "clientcert/%{::clientcert}"
+  - "%{::environment}"
+  - common

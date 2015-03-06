@@ -9,6 +9,7 @@ boxes = [
 #   :eth1        => "192.168.205.10",
     :mem         => "1024",
     :cpu         => "2",
+    :branch      => "production",
     :role        => "role"
   },
   {
@@ -17,6 +18,7 @@ boxes = [
 #   :eth1        => "192.168.205.11",
     :mem         => "1024",
     :cpu         => "2",
+    :branch      => "production",
     :role        => "role"
   },
   {
@@ -25,6 +27,7 @@ boxes = [
 #   :eth1        => "192.168.205.12",
     :mem         => "1024",
     :cpu         => "2",
+    :branch      => "production",
     :role        => "role"
   }
 ]

@@ -4,29 +4,29 @@
 
 boxes = [
   {
-    :box         => "puppetlabs/centos-6.5-64-puppet",
+    :box         => "puppetlabs/centos-6.6-64-puppet",
     :name        => "server1",
-#    :eth1        => "192.168.205.10",
+#   :eth1        => "192.168.205.10",
     :mem         => "1024",
     :cpu         => "2",
     :role        => "role"
   },
-#  {
-#    :box         => "puppetlabs/centos-6.5-64-puppet",
-#    :name        => "server2",
-#    :eth1        => "192.168.205.11",
-#    :mem         => "1024",
-#    :cpu         => "2",
-#    :role        => "role"
-#  },
-#  {
-#    :box         => "puppetlabs/centos-6.5-64-puppet",
-#    :name        => "server3",
-#    :eth1        => "192.168.205.12",
-#    :mem         => "1024",
-#    :cpu         => "2",
-#    :role        => "role"
-#  }
+  {
+    :box         => "puppetlabs/centos-6.6-64-puppet",
+    :name        => "server2",
+#   :eth1        => "192.168.205.11",
+    :mem         => "1024",
+    :cpu         => "2",
+    :role        => "role"
+  },
+  {
+    :box         => "puppetlabs/centos-6.6-64-puppet",
+    :name        => "server3",
+#   :eth1        => "192.168.205.12",
+    :mem         => "1024",
+    :cpu         => "2",
+    :role        => "role"
+  }
 ]
 
 # All Vagrant configuration is done below. The "2" in Vagrant.configure
@@ -57,13 +57,13 @@ Vagrant.configure(2) do |config|
         v.customize ["modifyvm", :id, "--memory", opts[:mem]]
         v.customize ["modifyvm", :id, "--cpus", opts[:cpu]]
       end
-#      config.vm.network :private_network, ip: opts[:eth1]
+#     config.vm.network :private_network, ip: opts[:eth1]
     end
     config.vm.provision "puppet" do |puppet|
       puppet.facter = {
         "role"   => opts[:role],
       }
-#      puppet.options = "--verbose --debug"
+#     puppet.options = "--verbose --debug"
       puppet.module_path = "puppet-r10k-environments/modules"
       puppet.hiera_config_path = "hiera.yaml"
     end

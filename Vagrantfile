@@ -40,8 +40,11 @@ Vagrant.configure(2) do |config|
   # https://docs.vagrantup.com.
 
   #config.vm.box = "puppetlabs/centos-6.5-64-puppet"
+  #config.vm.box = "puppetlabs/centos-6.6-64-puppet"
   #config.vm.box = "puppetlabs/centos-7.0-64-puppet"
   #config.vm.box = "puppetlabs/ubuntu-14.04-64-puppet"
+
+  config.vm.synched_folder ".", "/vagrant", id: "vagrant-root", disabled: true
 
   boxes.each do |opts|
     config.vm.box = opts[:box]

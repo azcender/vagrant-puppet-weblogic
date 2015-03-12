@@ -1,6 +1,8 @@
-[submodule "puppet-r10k-hiera"]
-	path = puppet-r10k-hiera
-	url = https://prolixalias@bitbucket.org/prolixalias/puppet-r10k-hiera.git
-[submodule "puppet-r10k-environments"]
-	path = puppet-r10k-environments
-	url = https://prolixalias@bitbucket.org/prolixalias/puppet-r10k-environments.git
+[submodule "hiera/production"]
+	path = hiera/production
+	url = git@bitbucket.org:prolixalias/puppet-r10k-hiera.git
+	branch = production
+[submodule "environments/production"]
+	path = environments/production
+	url = git@bitbucket.org:prolixalias/puppet-r10k-environments.git
+	branch = production

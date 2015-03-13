@@ -1,3 +1,4 @@
 .vagrant
-puppet-r10k-environments
-puppet-r10k-hiera
+.librarian
+environments
+hiera

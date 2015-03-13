@@ -19,7 +19,7 @@ boxes = [
 #   :eth1                   => "192.168.205.11",
     :mem                    => "1024",
     :cpu                    => "2",
-    :branch                 => "suresh",
+    :branch                 => "ron",
     :role                   => "role",
     :ruby                   => "2.1.2"
   },
@@ -29,7 +29,7 @@ boxes = [
 #   :eth1                   => "192.168.205.12",
     :mem                    => "1024",
     :cpu                    => "2",
-    :branch                 => "ron",
+    :branch                 => "suresh",
     :role                   => "role",
     :ruby                   => "2.1.2"
   },

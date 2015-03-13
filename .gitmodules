@@ -1,7 +1,3 @@
-[submodule "hiera/production"]
-	path = hiera/production
-	url = git@bitbucket.org:prolixalias/puppet-r10k-hiera.git
-	branch = production
 [submodule "environments/production"]
 	path = environments/production
 	url = git@bitbucket.org:prolixalias/puppet-r10k-environments.git

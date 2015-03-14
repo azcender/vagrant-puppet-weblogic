@@ -7,7 +7,7 @@ node default {
   Package {
     allow_virtual => true,
   }
-  notify(“My branch is: ${::environment})
+  notice("My branch is: ${::environment}")
   hiera_include('classes')
 }
 

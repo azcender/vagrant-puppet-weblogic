@@ -13,7 +13,7 @@ osfamily=`facter osfamily`
 
 declare -a gems_install=("puppet" "facter" "hiera" "ruby-shadow" "json" "bundler" "librarian-puppet" "ruby-augeas" "augeas")
 declare -a rpms_install=("libxml2-devel" "augeas-devel" "augeas-libs")
-declare -a rpms_remove=("ruby-devel" "facter" "hiera" "puppet" "ruby-irIb" "ruby-rdoc" "ruby-shadow" "rubygem-json" "rubygems")
+declare -a rpms_remove=("ruby-devel" "facter" "hiera" "puppet" "ruby-irIb" "ruby-rdoc" "ruby-shadow" "rubygem-json" "rubygems" "ruby")
 declare -a branches=("production" "paul" "ron" "dj" "suresh" "bryan")
 
 ### FUNCTIONS
@@ -36,13 +36,13 @@ vm_initial_yum () {
 
 vm_setup_rvm () {
   if [ "${ruby_installed}" = "${ruby_desired}" ]; then
-    echo "Ruby seems to be okay: ${ruby_installed}"
+    echo "Ruby version: ${ruby_installed}"
   else
     #/usr/bin/gpg2 --keyserver hkp://keys.gnupg.net:80 --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
     command /usr/bin/curl -sSL https://rvm.io/mpapis.asc | /usr/bin/gpg --import -
     /usr/bin/curl -L get.rvm.io | /bin/bash -s stable
     source /etc/profile.d/rvm.sh
-    rvm get head
+    #rvm get head
     #rvm install ${ruby_version} --disable-binary
     rvm install ${ruby_version}
     rvm --default use ${ruby_version}
@@ -52,8 +52,9 @@ vm_setup_rvm () {
 }
 
 vm_install_gems () {
+  (
   for gem in "${gems_install[@]}"; do
-    if ! gem list ${gem} -i; then
+    if ! (gem list ${gem} -i); then
       gem install ${gem} --no-ri --no-rdoc
     fi
   done 
@@ -61,6 +62,7 @@ vm_install_gems () {
   #gem pristine gem-wrappers --version 1.2.7
   #gem pristine gem-wrappers --version 1.2.4
   #gem update
+  )
 }
 
 localdev_setup () {

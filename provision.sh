@@ -31,7 +31,7 @@ vm_initial_yum () {
       /usr/bin/yum install -y --quiet ${rpm}
     fi
   done
-  /usr/bin/yum update -y
+  #/usr/bin/yum update -y
 }
 
 vm_setup_rvm () {
@@ -43,8 +43,10 @@ vm_setup_rvm () {
     /usr/bin/curl -L get.rvm.io | /bin/bash -s stable
     source /etc/profile.d/rvm.sh
     rvm get head
-    rvm install ${ruby_version} --disable-binary
+    #rvm install ${ruby_version} --disable-binary
+    rvm install ${ruby_version}
     rvm --default use ${ruby_version}
+    rvm reload
     #gem update --system
   fi
 }
@@ -86,11 +88,13 @@ localdev_setup () {
 case ${osfamily} in
   "Darwin")
     localdev_setup
+    exit 0
   ;;
   "RedHat")
     vm_initial_yum
     vm_setup_rvm
     vm_install_gems
+    exit 0
   ;;
   *)
     echo "Unsupported operating system (${osfamily})"

@@ -79,13 +79,13 @@ Vagrant.configure(2) do |config|
         v.customize ["modifyvm", :id, "--memory", opts[:mem]]
         v.customize ["modifyvm", :id, "--cpus", opts[:cpu]]
       end
-#     config.vm.network :private_network, ip: opts[:eth1]
+      #config.vm.network :private_network, ip: opts[:eth1]
     end
     config.vm.provision "shell", inline: $script
-    config.vm.provision "shell" do |s|
-      s.path = "provision.sh" 
-      s.args = ["#{opts[:branch]}", "#{opts[:ruby]}"]
-    end
+    #config.vm.provision "shell" do |s|
+    #  s.path = "provision.sh" 
+    #  s.args = ["#{opts[:branch]}", "#{opts[:ruby]}"]
+    #end
     config.vm.provision "puppet" do |puppet|
       puppet.facter = {
         "role"       => opts[:role],

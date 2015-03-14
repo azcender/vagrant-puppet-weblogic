@@ -80,21 +80,21 @@ Vagrant.configure(2) do |config|
         v.customize ["modifyvm", :id, "--cpus", opts[:cpu]]
       end
       #config.vm.network :private_network, ip: opts[:eth1]
-    end
-    config.vm.provision "shell", inline: $script
-    #config.vm.provision "shell" do |s|
-    #  s.path = "provision.sh" 
-    #  s.args = ["#{opts[:branch]}", "#{opts[:ruby]}"]
-    #end
-    config.vm.provision "puppet" do |puppet|
-      puppet.facter = {
-        "role"       => opts[:role],
-        "environment" => opts[:branch],
-      }
-#     puppet.options = "--verbose --debug"
-#     puppet.module_path = "puppet-r10k-environments/modules"
-      puppet.module_path = "environments/#{opts[:branch]}/modules"
-      puppet.hiera_config_path = "hiera.yaml"
+      config.vm.provision "shell", inline: $script
+      config.vm.provision "shell" do |s|
+        s.path = "provision.sh" 
+        s.args = ["#{opts[:branch]}", "#{opts[:ruby]}"]
+      end
+      config.vm.provision "puppet" do |puppet|
+        puppet.facter = {
+          "role"       => opts[:role],
+          "environment" => opts[:branch],
+        }
+        #puppet.options = "--verbose --debug"
+        #puppet.module_path = "puppet-r10k-environments/modules"
+        puppet.module_path = "environments/#{opts[:branch]}/modules"
+        puppet.hiera_config_path = "hiera.yaml"
+      end
     end
   end
 end

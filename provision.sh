@@ -66,11 +66,13 @@ vm_install_gems () {
 case ${osfamily} in
   "Darwin")
     cd ${localdev_dir}
-    /usr/bin/git rm environments/*
+    #/usr/bin/git rm environments/*
     for branch in "${branches[@]}"; do
       cd ${localdev_dir}
       #/usr/bin/git submodule add --force -b ${branch} git@bitbucket.org:prolixalias/puppet-r10k-environments.git environments/${branch}
       #/usr/bin/git submodule add --force -b ${branch} git@bitbucket.org:prolixalias/puppet-r10k-hiera.git hiera/${branch}
+      git submodule init
+      git submodule update
       cd environments/${branch}
       mkdir modules
       if [ -f ${localdev_dir}/environments/${branch}/Puppetfile.lock ]; then

@@ -61,27 +61,31 @@ vm_install_gems () {
   #gem update
 }
 
+localdev_setup () {
+  cd ${localdev_dir}
+  #/usr/bin/git rm environments/*
+  for branch in "${branches[@]}"; do
+    cd ${localdev_dir}
+    #/usr/bin/git submodule add --force -b ${branch} git@bitbucket.org:prolixalias/puppet-r10k-environments.git environments/${branch}
+    #/usr/bin/git submodule add --force -b ${branch} git@bitbucket.org:prolixalias/puppet-r10k-hiera.git hiera/${branch}
+    git submodule init
+    git submodule update
+    cd environments/${branch}
+    mkdir modules
+    if [ -f ${localdev_dir}/environments/${branch}/Puppetfile.lock ]; then
+      echo "It seems librarian-puppet has been run previously"
+    else
+      cd ${localdev_dir}/environments/${branch}
+      librarian-puppet install --verbose --clean
+    fi
+  done
+}
+
 ### MAIN
 
 case ${osfamily} in
   "Darwin")
-    cd ${localdev_dir}
-    #/usr/bin/git rm environments/*
-    for branch in "${branches[@]}"; do
-      cd ${localdev_dir}
-      #/usr/bin/git submodule add --force -b ${branch} git@bitbucket.org:prolixalias/puppet-r10k-environments.git environments/${branch}
-      #/usr/bin/git submodule add --force -b ${branch} git@bitbucket.org:prolixalias/puppet-r10k-hiera.git hiera/${branch}
-      git submodule init
-      git submodule update
-      cd environments/${branch}
-      mkdir modules
-      if [ -f ${localdev_dir}/environments/${branch}/Puppetfile.lock ]; then
-        echo "It seems librarian-puppet has been run previously"
-      else
-        cd ${localdev_dir}/environments/${branch}
-        librarian-puppet install --verbose --clean
-      fi
-    done
+    localdev_setup
   ;;
   "RedHat")
     vm_initial_yum

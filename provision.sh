@@ -11,7 +11,8 @@ osfamily=`facter osfamily`
 
 ### ARRAYS
 
-declare -a gems_install=("puppet" "facter" "hiera" "ruby-shadow" "json" "bundler" "librarian-puppet")
+declare -a gems_install=("puppet" "facter" "hiera" "ruby-shadow" "json" "bundler" "librarian-puppet" "ruby-augeas" "augeas")
+declare -a rpms_install=("libxml2-devel" "augeas-devel" "augeas-libs")
 declare -a rpms_remove=("ruby-devel" "facter" "hiera" "puppet" "ruby-irIb" "ruby-rdoc" "ruby-shadow" "rubygem-json" "rubygems")
 declare -a branches=("production" "paul" "ron" "dj" "suresh" "bryan")
 
@@ -23,6 +24,11 @@ vm_initial_yum () {
   for rpm in "${rpms_remove[@]}"; do
     if ! rpm -qa | grep -qw ${rpm}; then
       /usr/bin/yum remove -y --quiet ${rpm}
+    fi
+  done
+  for rpm in "${rpms_install[@]}"; do
+    if ! rpm -qa | grep -qw ${rpm}; then
+      /usr/bin/yum install -y --quiet ${rpm}
     fi
   done
   /usr/bin/yum update -y
@@ -37,7 +43,8 @@ vm_setup_rvm () {
     /usr/bin/curl -L get.rvm.io | /bin/bash -s stable
     source /etc/profile.d/rvm.sh
     rvm get head
-    rvm install ${ruby_version}
+    rvm install ${ruby_version} --disable-binary
+    rvm --default use ${ruby_version}
     #gem update --system
   fi
 }
@@ -52,6 +59,8 @@ vm_install_gems () {
   #gem pristine gem-wrappers --version 1.2.7
   #gem pristine gem-wrappers --version 1.2.4
   #gem update
+  cp /usr/lib64/ruby/site_ruby/1.8/x86_64-linux/_augeas.so /usr/local/rvm/rubies/ruby-1.9.3-p551/lib/ruby/site_ruby/1.9.1/x86_64-linux
+  cp /usr/lib/ruby/site_ruby/1.8/augeas.rb  /usr/local/rvm/rubies/ruby-1.9.3-p551/lib/ruby/site_ruby/1.9.1
 }
 
 ### MAIN

@@ -2,3 +2,4 @@
 .librarian
 environments
 hiera
+*.swp

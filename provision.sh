@@ -59,8 +59,6 @@ vm_install_gems () {
   #gem pristine gem-wrappers --version 1.2.7
   #gem pristine gem-wrappers --version 1.2.4
   #gem update
-  cp /usr/lib64/ruby/site_ruby/1.8/x86_64-linux/_augeas.so /usr/local/rvm/rubies/ruby-1.9.3-p551/lib/ruby/site_ruby/1.9.1/x86_64-linux
-  cp /usr/lib/ruby/site_ruby/1.8/augeas.rb  /usr/local/rvm/rubies/ruby-1.9.3-p551/lib/ruby/site_ruby/1.9.1
 }
 
 ### MAIN
@@ -71,8 +69,8 @@ case ${osfamily} in
     /usr/bin/git rm environments/*
     for branch in "${branches[@]}"; do
       cd ${localdev_dir}
-      /usr/bin/git submodule add --force -b ${branch} git@bitbucket.org:prolixalias/puppet-r10k-environments.git environments/${branch}
-      /usr/bin/git submodule add --force -b ${branch} git@bitbucket.org:prolixalias/puppet-r10k-hiera.git hiera/${branch}
+      #/usr/bin/git submodule add --force -b ${branch} git@bitbucket.org:prolixalias/puppet-r10k-environments.git environments/${branch}
+      #/usr/bin/git submodule add --force -b ${branch} git@bitbucket.org:prolixalias/puppet-r10k-hiera.git hiera/${branch}
       cd environments/${branch}
       mkdir modules
       if [ -f ${localdev_dir}/environments/${branch}/Puppetfile.lock ]; then

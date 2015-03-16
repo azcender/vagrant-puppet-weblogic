@@ -90,13 +90,11 @@ localdev_setup () {
 case ${osfamily} in
   "Darwin")
     localdev_setup
-    exit 0
   ;;
   "RedHat")
     vm_initial_yum
     vm_setup_rvm
     vm_install_gems
-    exit 0
   ;;
   *)
     echo "Unsupported operating system (${osfamily})"

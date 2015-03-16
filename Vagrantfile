@@ -91,7 +91,6 @@ Vagrant.configure(2) do |config|
           "environment" => opts[:branch],
         }
         #puppet.options = "--verbose --debug"
-        #puppet.module_path = "puppet-r10k-environments/modules"
         puppet.module_path = "environments/#{opts[:branch]}/modules"
         puppet.hiera_config_path = "hiera.yaml"
       end

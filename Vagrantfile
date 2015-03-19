@@ -29,8 +29,8 @@ boxes = [
 #   :eth1                   => "192.168.205.12",
     :mem                    => "1024",
     :cpu                    => "2",
-    :branch                 => "suresh",
-    :role                   => "role",
+    :branch                 => "paul",
+    :role                   => "jenkins_master",
     :ruby                   => "2.1.2"
   },
   {

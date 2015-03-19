@@ -4,7 +4,7 @@
 
 puppet_environment=$1
 ruby_version=$2
-localdev_dir="."
+localdev_dir=`pwd`
 ruby_desired="ruby-${ruby_version}"
 ruby_installed=`rvm current`
 osfamily=`facter osfamily`

@@ -30,7 +30,7 @@ boxes = [
     :mem                    => "1024",
     :cpu                    => "2",
     :branch                 => "paul",
-    :role                   => "jenkins_master",
+    :role                   => "tomcat",
     :ruby                   => "2.1.2"
   },
   {

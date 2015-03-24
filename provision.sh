@@ -70,8 +70,8 @@ localdev_setup () {
   #/usr/bin/git rm environments/*
   for branch in "${branches[@]}"; do
     cd ${localdev_dir}
-    /usr/bin/git submodule add --force -b ${branch} git@bitbucket.org:prolixalias/puppet-r10k-environments.git environments/${branch}
-    /usr/bin/git submodule add --force -b ${branch} git@bitbucket.org:prolixalias/puppet-r10k-hiera.git hiera/${branch}
+    #/usr/bin/git submodule add --force -b ${branch} git@bitbucket.org:prolixalias/puppet-r10k-environments.git environments/${branch}
+    #/usr/bin/git submodule add --force -b ${branch} git@bitbucket.org:prolixalias/puppet-r10k-hiera.git hiera/${branch}
     git submodule init
     git submodule update
     cd environments/${branch}

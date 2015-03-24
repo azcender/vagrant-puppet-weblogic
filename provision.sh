@@ -88,7 +88,7 @@ localdev_setup () {
 ### MAIN
 
 case ${osfamily} in
-  "Darwin")
+  "Darwin" | "windows")
     localdev_setup
   ;;
   "RedHat")

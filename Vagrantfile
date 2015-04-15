@@ -6,43 +6,43 @@ boxes = [
   {
     :box                    => "puppetlabs/centos-6.6-64-puppet",
     :name                   => "server0",
-#   :eth1                   => "192.168.205.10",
+    :eth1                   => "192.168.205.10",
     :mem                    => "1024",
     :cpu                    => "2",
     :branch                 => "production",
-    :role                   => "role",
+    :role                   => "lamp",
     :ruby                   => "2.1.2"
   },
-  {
-    :box                    => "puppetlabs/centos-6.6-64-puppet",
-    :name                   => "server1",
-#   :eth1                   => "192.168.205.11",
-    :mem                    => "1024",
-    :cpu                    => "2",
-    :branch                 => "production",
-    :role                   => "role",
-    :ruby                   => "2.1.2"
-  },
-  {
-    :box                    => "puppetlabs/centos-6.6-64-puppet",
-    :name                   => "server2",
-#   :eth1                   => "192.168.205.12",
-    :mem                    => "1024",
-    :cpu                    => "2",
-    :branch                 => "production",
-    :role                   => "role",
-    :ruby                   => "2.1.2"
-  },
-  {
-    :box                    => "puppetlabs/centos-6.6-64-puppet",
-    :name                   => "server3",
-#   :eth1                   => "192.168.205.13",
-    :mem                    => "1024",
-    :cpu                    => "2",
-    :branch                 => "production",
-    :role                   => "role",
-    :ruby                   => "2.1.2"
-  }
+#  {
+#    :box                    => "puppetlabs/centos-6.6-64-puppet",
+#    :name                   => "server1",
+##   :eth1                   => "192.168.205.11",
+#    :mem                    => "1024",
+#    :cpu                    => "2",
+#    :branch                 => "production",
+#    :role                   => "role",
+#    :ruby                   => "2.1.2"
+#  },
+#  {
+#    :box                    => "puppetlabs/centos-6.6-64-puppet",
+#    :name                   => "server2",
+##   :eth1                   => "192.168.205.12",
+#    :mem                    => "1024",
+#    :cpu                    => "2",
+#    :branch                 => "production",
+#    :role                   => "role",
+#    :ruby                   => "2.1.2"
+#  },
+#  {
+#    :box                    => "puppetlabs/centos-6.6-64-puppet",
+#    :name                   => "server3",
+##   :eth1                   => "192.168.205.13",
+#    :mem                    => "1024",
+#    :cpu                    => "2",
+#    :branch                 => "production",
+#    :role                   => "role",
+#    :ruby                   => "2.1.2"
+#  }
 ]
 
 $script = <<SCRIPT
@@ -79,7 +79,7 @@ Vagrant.configure(2) do |config|
         v.customize ["modifyvm", :id, "--memory", opts[:mem]]
         v.customize ["modifyvm", :id, "--cpus", opts[:cpu]]
       end
-      #config.vm.network :private_network, ip: opts[:eth1]
+      config.vm.network :private_network, ip: opts[:eth1]
       config.vm.provision "shell", inline: $script
       config.vm.provision "shell" do |s|
         s.path = "provision.sh" 

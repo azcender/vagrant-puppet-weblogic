@@ -6,7 +6,7 @@ puppet_environment=$1
 ruby_version=$2
 localdev_dir=`pwd`
 ruby_desired="ruby-${ruby_version}"
-ruby_installed=`rvm current`
+ruby_installed=`rvm current 2> /dev/null`
 osfamily=`facter osfamily`
 
 ### ARRAYS
@@ -14,7 +14,8 @@ osfamily=`facter osfamily`
 declare -a gems_install=("puppet" "facter" "hiera" "ruby-shadow" "json" "bundler" "librarian-puppet" "ruby-augeas" "augeas")
 declare -a rpms_install=("libxml2-devel" "augeas-devel" "augeas-libs")
 declare -a rpms_remove=("ruby-devel" "facter" "hiera" "puppet" "ruby-irIb" "ruby-rdoc" "ruby-shadow" "rubygem-json" "rubygems" "ruby")
-declare -a branches=("production" "paul" "ron" "dj" "suresh" "bryan")
+#declare -a branches=("production" "paul" "ron" "dj" "suresh" "bryan")
+declare -a branches=("production" "paul")
 
 ### FUNCTIONS
 
@@ -68,19 +69,20 @@ vm_install_gems () {
 localdev_setup () {
   cd ${localdev_dir}
   #/usr/bin/git rm environments/*
+  git submodule init
+  git submodule update
   for branch in "${branches[@]}"; do
     cd ${localdev_dir}
     #/usr/bin/git submodule add --force -b ${branch} git@bitbucket.org:prolixalias/puppet-r10k-environments.git environments/${branch}
     #/usr/bin/git submodule add --force -b ${branch} git@bitbucket.org:prolixalias/puppet-r10k-hiera.git hiera/${branch}
-    git submodule init
-    git submodule update
     cd environments/${branch}
-    mkdir modules
-    if [ -f ${localdev_dir}/environments/${branch}/Puppetfile.lock ]; then
-      echo "It seems librarian-puppet has been run previously"
+    git pull
+    git checkout ${branch}
+    if [ -f ${localdev_dir}/environments/${branch}/modules ]; then
+      echo "It seems provision has completed previously"
     else
       cd ${localdev_dir}/environments/${branch}
-      librarian-puppet install --verbose --clean
+      ./install_modules2.sh
     fi
   done
 }
@@ -98,7 +100,6 @@ case ${osfamily} in
   ;;
   *)
     echo "Unsupported operating system (${osfamily})"
-  ;;
 esac
 
 ### EOF

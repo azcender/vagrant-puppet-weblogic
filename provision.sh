@@ -76,13 +76,14 @@ localdev_setup () {
     #/usr/bin/git submodule add --force -b ${branch} git@bitbucket.org:prolixalias/puppet-r10k-environments.git environments/${branch}
     #/usr/bin/git submodule add --force -b ${branch} git@bitbucket.org:prolixalias/puppet-r10k-hiera.git hiera/${branch}
     cd environments/${branch}
-    git pull origin ${branch}
-    git checkout ${branch}
+    #git pull origin ${branch}
+    git pull
+    #git checkout ${branch}
     if [ -f ${localdev_dir}/environments/${branch}/modules ]; then
       echo "Ran previously, not installing modules."
     else
       cd ${localdev_dir}/environments/${branch}
-      ./install_modules2.sh
+      cat install_modules2.sh | bash
     fi
   done
 }

@@ -76,10 +76,10 @@ localdev_setup () {
     #/usr/bin/git submodule add --force -b ${branch} git@bitbucket.org:prolixalias/puppet-r10k-environments.git environments/${branch}
     #/usr/bin/git submodule add --force -b ${branch} git@bitbucket.org:prolixalias/puppet-r10k-hiera.git hiera/${branch}
     cd environments/${branch}
-    git pull
+    git pull origin ${branch}
     git checkout ${branch}
     if [ -f ${localdev_dir}/environments/${branch}/modules ]; then
-      echo "It seems provision has completed previously"
+      echo "Ran previously, not installing modules."
     else
       cd ${localdev_dir}/environments/${branch}
       ./install_modules2.sh
@@ -92,14 +92,15 @@ localdev_setup () {
 case ${osfamily} in
   "Darwin" | "windows")
     localdev_setup
-  ;;
+    ;;
   "RedHat")
     vm_initial_yum
     vm_setup_rvm
     vm_install_gems
-  ;;
+    ;;
   *)
-    echo "Unsupported operating system (${osfamily})"
+    echo "Unsupported operating system: ${osfamily}"
+    ;;
 esac
 
 ### EOF

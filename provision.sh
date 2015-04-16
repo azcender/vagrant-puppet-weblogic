@@ -76,8 +76,7 @@ localdev_setup () {
     #/usr/bin/git submodule add --force -b ${branch} git@bitbucket.org:prolixalias/puppet-r10k-environments.git environments/${branch}
     #/usr/bin/git submodule add --force -b ${branch} git@bitbucket.org:prolixalias/puppet-r10k-hiera.git hiera/${branch}
     cd environments/${branch}
-    #git pull origin ${branch}
-    git pull
+    git pull origin ${branch}
     #git checkout ${branch}
     if [ -f ${localdev_dir}/environments/${branch}/modules ]; then
       echo "Ran previously, not installing modules."
@@ -95,9 +94,9 @@ case ${osfamily} in
     localdev_setup
     ;;
   "RedHat")
-    vm_initial_yum
-    vm_setup_rvm
-    vm_install_gems
+    #vm_initial_yum
+    #vm_setup_rvm
+    #vm_install_gems
     ;;
   *)
     echo "Unsupported operating system: ${osfamily}"

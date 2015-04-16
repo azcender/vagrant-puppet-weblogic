@@ -10,7 +10,7 @@ boxes = [
     :mem                    => "1024",
     :cpu                    => "2",
     :branch                 => "production",
-    :role                   => "lamp",
+    :role                   => "role",
     :ruby                   => "2.1.2"
   },
 #  {

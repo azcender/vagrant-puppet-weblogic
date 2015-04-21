@@ -73,7 +73,7 @@ localdev_setup () {
   git submodule update
   for branch in "${branches[@]}"; do
     cd ${localdev_dir}
-    #/usr/bin/git submodule add --force -b ${branch} git@github.com:azcender/puppet-r10k-environments.git environments/${branch}
+    #/usr/bin/git submodule add --force -b ${branch} git@github.com:azcender/puppet-r10k-environment.git environments/${branch}
     #/usr/bin/git submodule add --force -b ${branch} git@github.com:azcender/puppet-r10k-hiera.git hiera/${branch}
     cd environments/${branch}
     git pull origin ${branch}

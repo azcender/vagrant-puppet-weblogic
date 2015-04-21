@@ -73,8 +73,14 @@ localdev_setup () {
   git submodule update
   for branch in "${branches[@]}"; do
     cd ${localdev_dir}
-    #/usr/bin/git submodule add --force -b ${branch} git@github.com:azcender/puppet-r10k-environment.git environments/${branch}
-    #/usr/bin/git submodule add --force -b ${branch} git@github.com:azcender/puppet-r10k-hiera.git hiera/${branch}
+    case ${puppet_environment} in
+      initial)
+        /usr/bin/git submodule add --force -b ${branch} git@github.com:azcender/puppet-r10k-environment.git environments/${branch}
+        /usr/bin/git submodule add --force -b ${branch} git@github.com:azcender/puppet-r10k-hiera.git hiera/${branch}
+	;;
+      *)
+        echo "Nothing passed to script, continuing with defaults."
+    esac
     cd environments/${branch}
     git pull origin ${branch}
     #git checkout ${branch}

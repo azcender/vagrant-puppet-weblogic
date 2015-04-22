@@ -1,0 +1,8 @@
+[submodule "environments/production"]
+	path = environments/production
+	url = git@github.com:azcender/puppet-r10k-environment.git
+	branch = production
+[submodule "hiera/production"]
+	path = hiera/production
+	url = git@github.com:azcender/puppet-r10k-hiera.git
+	branch = production

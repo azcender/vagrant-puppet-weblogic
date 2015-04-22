@@ -15,7 +15,7 @@ declare -a gems_install=("puppet" "facter" "hiera" "ruby-shadow" "json" "bundler
 declare -a rpms_install=("libxml2-devel" "augeas-devel" "augeas-libs")
 declare -a rpms_remove=("ruby-devel" "facter" "hiera" "puppet" "ruby-irIb" "ruby-rdoc" "ruby-shadow" "rubygem-json" "rubygems" "ruby")
 #declare -a branches=("production" "paul" "ron" "dj" "suresh" "bryan")
-declare -a branches=("production" "paul")
+declare -a branches=("production")
 
 ### FUNCTIONS
 

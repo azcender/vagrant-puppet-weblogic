@@ -7,10 +7,10 @@ boxes = [
     :box                    => "puppetlabs/centos-6.6-64-puppet",
     :name                   => "server0",
     :eth1                   => "192.168.205.10",
-    :mem                    => "1024",
+    :mem                    => "4096",
     :cpu                    => "2",
     :branch                 => "production",
-    :role                   => "role",
+    :role                   => "weblogic",
     :ruby                   => "2.1.2"
   },
 #  {

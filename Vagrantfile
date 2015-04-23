@@ -16,7 +16,7 @@ boxes = [
 #  {
 #    :box                    => "puppetlabs/centos-6.6-64-puppet",
 #    :name                   => "server1",
-##   :eth1                   => "192.168.205.11",
+##    :eth1                   => "192.168.205.11",
 #    :mem                    => "1024",
 #    :cpu                    => "2",
 #    :branch                 => "production",
